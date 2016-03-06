@@ -7,9 +7,11 @@ public class Manager : MonoBehaviour {
 	public GameObject greenButton;
 	public GameObject redButton;
 	public GameObject blueButton;
+	public GameObject pointGUI;
 
+	private int playerPoints = 0;
 	private List<int> pattern = new List<int>();
-	public bool isPlayerTurn = false;
+	private bool isPlayerTurn = false;
 	private int actual = 0;
 
 	void Start () {
@@ -24,35 +26,40 @@ public class Manager : MonoBehaviour {
 
 		}
 
+		pointGUI.GetComponent<UnityEngine.UI.Text> ().text = "Points: " + playerPoints;
 	}
 
 	private IEnumerator ShowPattern() {
 		yield return new WaitForSeconds (1);
 
-		foreach (int color in pattern) {
-			switch (color) {
+		for (int i = 0; i < pattern.Count; i++) {
+			switch (pattern[i]) {
 			case 1:
 				yellowButton.GetComponent<UnityEngine.UI.Image> ().color = Color.yellow;
-				yield return new WaitForSeconds (1);
+				yield return new WaitForSeconds (0.5f);
 				yellowButton.GetComponent<UnityEngine.UI.Image> ().color = Color.white;
+				yield return new WaitForSeconds (0.5f);
 				break;
 
 			case 2:
 				greenButton.GetComponent<UnityEngine.UI.Image> ().color = Color.green;
-				yield return new WaitForSeconds (1);
+				yield return new WaitForSeconds (0.5f);
 				greenButton.GetComponent<UnityEngine.UI.Image> ().color = Color.white;
+				yield return new WaitForSeconds (0.5f);
 				break;
 
 			case 3:
 				redButton.GetComponent<UnityEngine.UI.Image> ().color = Color.red;
-				yield return new WaitForSeconds (1);
+				yield return new WaitForSeconds (0.5f);
 				redButton.GetComponent<UnityEngine.UI.Image> ().color = Color.white;
+				yield return new WaitForSeconds (1);
 				break;
 
 			case 4:
 				blueButton.GetComponent<UnityEngine.UI.Image> ().color = Color.blue;
-				yield return new WaitForSeconds (1);
+				yield return new WaitForSeconds (0.5f);
 				blueButton.GetComponent<UnityEngine.UI.Image> ().color = Color.white;
+				yield return new WaitForSeconds (0.5f);
 				break;
 
 			}
@@ -69,6 +76,7 @@ public class Manager : MonoBehaviour {
 		if (actual == pattern.Count - 1) {
 			actual = 0;
 			isPlayerTurn = !isPlayerTurn;
+			playerPoints++;
 			
 		} else {
 			actual++;
@@ -86,6 +94,7 @@ public class Manager : MonoBehaviour {
 		if (actual == pattern.Count - 1) {
 			actual = 0;
 			isPlayerTurn = !isPlayerTurn;
+			playerPoints++;
 
 		} else {
 			actual++;
@@ -104,6 +113,7 @@ public class Manager : MonoBehaviour {
 		if (actual == pattern.Count - 1) {
 			actual = 0;
 			isPlayerTurn = !isPlayerTurn;
+			playerPoints++;
 
 		} else {
 			actual++;
@@ -122,6 +132,7 @@ public class Manager : MonoBehaviour {
 		if (actual == pattern.Count - 1) {
 			actual = 0;
 			isPlayerTurn = !isPlayerTurn;
+			playerPoints++;
 
 		} else {
 			actual++;
