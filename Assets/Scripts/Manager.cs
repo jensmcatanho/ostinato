@@ -8,6 +8,8 @@ public class Manager : MonoBehaviour {
 	public GameObject redButton;
 	public GameObject blueButton;
 	public GameObject pointGUI;
+	public AudioClip pointSound;
+	public AudioClip errorSound;
 
 	private int playerPoints = 0;
 	private List<int> pattern = new List<int>();
@@ -20,7 +22,7 @@ public class Manager : MonoBehaviour {
 
 	void Update () {
 		if (!isPlayerTurn) {
-			pattern.Add (Random.Range (1, 4));
+			pattern.Add (Random.Range (1, 5));
 			StartCoroutine(ShowPattern());
 			isPlayerTurn = !isPlayerTurn;
 
@@ -30,11 +32,12 @@ public class Manager : MonoBehaviour {
 	}
 
 	private IEnumerator ShowPattern() {
-		yield return new WaitForSeconds (1);
+		yield return new WaitForSeconds (1.5f);
 
 		for (int i = 0; i < pattern.Count; i++) {
 			switch (pattern[i]) {
 			case 1:
+				yellowButton.GetComponent<AudioSource> ().Play ();
 				yellowButton.GetComponent<UnityEngine.UI.Image> ().color = Color.yellow;
 				yield return new WaitForSeconds (0.5f);
 				yellowButton.GetComponent<UnityEngine.UI.Image> ().color = Color.white;
@@ -42,6 +45,7 @@ public class Manager : MonoBehaviour {
 				break;
 
 			case 2:
+				greenButton.GetComponent<AudioSource> ().Play ();
 				greenButton.GetComponent<UnityEngine.UI.Image> ().color = Color.green;
 				yield return new WaitForSeconds (0.5f);
 				greenButton.GetComponent<UnityEngine.UI.Image> ().color = Color.white;
@@ -49,6 +53,7 @@ public class Manager : MonoBehaviour {
 				break;
 
 			case 3:
+				redButton.GetComponent<AudioSource> ().Play ();
 				redButton.GetComponent<UnityEngine.UI.Image> ().color = Color.red;
 				yield return new WaitForSeconds (0.5f);
 				redButton.GetComponent<UnityEngine.UI.Image> ().color = Color.white;
@@ -56,6 +61,7 @@ public class Manager : MonoBehaviour {
 				break;
 
 			case 4:
+				blueButton.GetComponent<AudioSource> ().Play ();
 				blueButton.GetComponent<UnityEngine.UI.Image> ().color = Color.blue;
 				yield return new WaitForSeconds (0.5f);
 				blueButton.GetComponent<UnityEngine.UI.Image> ().color = Color.white;
@@ -70,12 +76,16 @@ public class Manager : MonoBehaviour {
 		if (!isPlayerTurn)
 			return;
 
-		if (pattern [actual] != 1)
+		if (pattern [actual] != 1) {
+			AudioSource.PlayClipAtPoint (errorSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
 			return;
+		}
 
+		yellowButton.GetComponent<AudioSource> ().Play ();
 		if (actual == pattern.Count - 1) {
 			actual = 0;
 			isPlayerTurn = !isPlayerTurn;
+			AudioSource.PlayClipAtPoint (pointSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
 			playerPoints++;
 			
 		} else {
@@ -88,12 +98,16 @@ public class Manager : MonoBehaviour {
 		if (!isPlayerTurn)
 			return;
 
-		if (pattern [actual] != 2)
+		if (pattern [actual] != 2) {
+			AudioSource.PlayClipAtPoint (errorSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
 			return;
+		}
 
+		greenButton.GetComponent<AudioSource> ().Play ();
 		if (actual == pattern.Count - 1) {
 			actual = 0;
 			isPlayerTurn = !isPlayerTurn;
+			AudioSource.PlayClipAtPoint (pointSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
 			playerPoints++;
 
 		} else {
@@ -107,12 +121,16 @@ public class Manager : MonoBehaviour {
 		if (!isPlayerTurn)
 			return;
 
-		if (pattern [actual] != 3)
+		if (pattern [actual] != 3) {
+			AudioSource.PlayClipAtPoint (errorSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
 			return;
+		}
 
+		redButton.GetComponent<AudioSource> ().Play ();
 		if (actual == pattern.Count - 1) {
 			actual = 0;
 			isPlayerTurn = !isPlayerTurn;
+			AudioSource.PlayClipAtPoint (pointSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
 			playerPoints++;
 
 		} else {
@@ -126,12 +144,16 @@ public class Manager : MonoBehaviour {
 		if (!isPlayerTurn)
 			return;
 
-		if (pattern [actual] != 4)
+		if (pattern [actual] != 4) {
+			AudioSource.PlayClipAtPoint (errorSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
 			return;
+		}
 
+		blueButton.GetComponent<AudioSource> ().Play ();
 		if (actual == pattern.Count - 1) {
 			actual = 0;
 			isPlayerTurn = !isPlayerTurn;
+			AudioSource.PlayClipAtPoint (pointSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
 			playerPoints++;
 
 		} else {
