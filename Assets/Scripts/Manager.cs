@@ -18,6 +18,7 @@ public class Manager : MonoBehaviour {
 
 	void Start () {
 		
+
 	}
 
 	void Update () {
@@ -41,7 +42,6 @@ public class Manager : MonoBehaviour {
 				yellowButton.GetComponent<UnityEngine.UI.Image> ().color = Color.yellow;
 				yield return new WaitForSeconds (0.5f);
 				yellowButton.GetComponent<UnityEngine.UI.Image> ().color = Color.white;
-				yield return new WaitForSeconds (0.5f);
 				break;
 
 			case 2:
@@ -49,7 +49,6 @@ public class Manager : MonoBehaviour {
 				greenButton.GetComponent<UnityEngine.UI.Image> ().color = Color.green;
 				yield return new WaitForSeconds (0.5f);
 				greenButton.GetComponent<UnityEngine.UI.Image> ().color = Color.white;
-				yield return new WaitForSeconds (0.5f);
 				break;
 
 			case 3:
@@ -57,7 +56,6 @@ public class Manager : MonoBehaviour {
 				redButton.GetComponent<UnityEngine.UI.Image> ().color = Color.red;
 				yield return new WaitForSeconds (0.5f);
 				redButton.GetComponent<UnityEngine.UI.Image> ().color = Color.white;
-				yield return new WaitForSeconds (1);
 				break;
 
 			case 4:
@@ -65,7 +63,6 @@ public class Manager : MonoBehaviour {
 				blueButton.GetComponent<UnityEngine.UI.Image> ().color = Color.blue;
 				yield return new WaitForSeconds (0.5f);
 				blueButton.GetComponent<UnityEngine.UI.Image> ().color = Color.white;
-				yield return new WaitForSeconds (0.5f);
 				break;
 
 			}
@@ -78,6 +75,7 @@ public class Manager : MonoBehaviour {
 
 		if (pattern [actual] != 1) {
 			AudioSource.PlayClipAtPoint (errorSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
+			StartCoroutine(ChangeScene(2));
 			return;
 		}
 
@@ -100,6 +98,7 @@ public class Manager : MonoBehaviour {
 
 		if (pattern [actual] != 2) {
 			AudioSource.PlayClipAtPoint (errorSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
+			StartCoroutine(ChangeScene(2));
 			return;
 		}
 
@@ -123,6 +122,7 @@ public class Manager : MonoBehaviour {
 
 		if (pattern [actual] != 3) {
 			AudioSource.PlayClipAtPoint (errorSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
+			StartCoroutine(ChangeScene(2));
 			return;
 		}
 
@@ -146,6 +146,7 @@ public class Manager : MonoBehaviour {
 
 		if (pattern [actual] != 4) {
 			AudioSource.PlayClipAtPoint (errorSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
+			StartCoroutine(ChangeScene(2));
 			return;
 		}
 
@@ -160,5 +161,10 @@ public class Manager : MonoBehaviour {
 			actual++;
 
 		}
+	}
+
+	private IEnumerator ChangeScene(int scene) {
+		yield return new WaitForSeconds (1);
+		UnityEngine.SceneManagement.SceneManager.LoadScene (scene);
 	}
 }
