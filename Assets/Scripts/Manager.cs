@@ -17,11 +17,6 @@ public class Manager : MonoBehaviour {
 	private bool isPatternShowing = false;
 	private int actual = 0;
 
-	void Start () {
-		
-
-	}
-
 	void Update () {
 		if (!isPlayerTurn) {
 			pattern.Add (Random.Range (1, 5));
@@ -74,102 +69,27 @@ public class Manager : MonoBehaviour {
 		isPatternShowing = false;
 	}
 
-	public void YButton() {
+	public void pressButton(GameObject button) {
 		if (!isPlayerTurn || isPatternShowing)
 			return;
 
-		if (pattern [actual] != 1) {
-			AudioSource.PlayClipAtPoint (errorSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
-			StartCoroutine(ChangeScene(2));
+		if (pattern [actual] != button.GetComponent<Button> ().id) {
+			Utilities.PlayClip (errorSound, 100);
+			Utilities.ChangeScene (2, 1.2f);
 			return;
 		}
 
-		yellowButton.GetComponent<AudioSource> ().Play ();
-		if (actual == pattern.Count - 1) {
-			actual = 0;
-			isPlayerTurn = !isPlayerTurn;
-			AudioSource.PlayClipAtPoint (pointSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
-			playerPoints++;
-			
-		} else {
+		button.GetComponent<AudioSource> ().Play ();
+
+		if (actual != pattern.Count - 1) {
 			actual++;
-
-		}
-	}
-
-	public void GButton() {
-		if (!isPlayerTurn || isPatternShowing)
-			return;
-
-		if (pattern [actual] != 2) {
-			AudioSource.PlayClipAtPoint (errorSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
-			StartCoroutine(ChangeScene(2));
 			return;
 		}
 
-		greenButton.GetComponent<AudioSource> ().Play ();
-		if (actual == pattern.Count - 1) {
-			actual = 0;
-			isPlayerTurn = !isPlayerTurn;
-			AudioSource.PlayClipAtPoint (pointSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
-			playerPoints++;
+		actual = 0;
+		isPlayerTurn = false;
+		Utilities.PlayClip (pointSound, 100);
+		playerPoints++;
 
-		} else {
-			actual++;
-
-		}
-	
-	}
-
-	public void RButton() {
-		if (!isPlayerTurn || isPatternShowing)
-			return;
-
-		if (pattern [actual] != 3) {
-			AudioSource.PlayClipAtPoint (errorSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
-			StartCoroutine(ChangeScene(2));
-			return;
-		}
-
-		redButton.GetComponent<AudioSource> ().Play ();
-		if (actual == pattern.Count - 1) {
-			actual = 0;
-			isPlayerTurn = !isPlayerTurn;
-			AudioSource.PlayClipAtPoint (pointSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
-			playerPoints++;
-
-		} else {
-			actual++;
-
-		}
-	
-	}
-
-	public void BButton() {
-		if (!isPlayerTurn || isPatternShowing)
-			return;
-
-		if (pattern [actual] != 4) {
-			AudioSource.PlayClipAtPoint (errorSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
-			StartCoroutine(ChangeScene(2));
-			return;
-		}
-
-		blueButton.GetComponent<AudioSource> ().Play ();
-		if (actual == pattern.Count - 1) {
-			actual = 0;
-			isPlayerTurn = !isPlayerTurn;
-			AudioSource.PlayClipAtPoint (pointSound, new Vector3 (0.0f, 0.0f, 0.0f), 100);
-			playerPoints++;
-
-		} else {
-			actual++;
-
-		}
-	}
-
-	private IEnumerator ChangeScene(int scene) {
-		yield return new WaitForSeconds (1);
-		UnityEngine.SceneManagement.SceneManager.LoadScene (scene);
 	}
 }
