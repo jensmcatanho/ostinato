@@ -14,6 +14,7 @@ public class Manager : MonoBehaviour {
 	private int playerPoints = 0;
 	private List<int> pattern = new List<int>();
 	private bool isPlayerTurn = false;
+	private bool isPatternShowing = false;
 	private int actual = 0;
 
 	void Start () {
@@ -25,7 +26,7 @@ public class Manager : MonoBehaviour {
 		if (!isPlayerTurn) {
 			pattern.Add (Random.Range (1, 5));
 			StartCoroutine(ShowPattern());
-			isPlayerTurn = !isPlayerTurn;
+			isPlayerTurn = true;
 
 		}
 
@@ -33,6 +34,8 @@ public class Manager : MonoBehaviour {
 	}
 
 	private IEnumerator ShowPattern() {
+		isPatternShowing = true;
+
 		yield return new WaitForSeconds (1.5f);
 
 		for (int i = 0; i < pattern.Count; i++) {
@@ -67,10 +70,12 @@ public class Manager : MonoBehaviour {
 
 			}
 		}
+
+		isPatternShowing = false;
 	}
 
 	public void YButton() {
-		if (!isPlayerTurn)
+		if (!isPlayerTurn || isPatternShowing)
 			return;
 
 		if (pattern [actual] != 1) {
@@ -93,7 +98,7 @@ public class Manager : MonoBehaviour {
 	}
 
 	public void GButton() {
-		if (!isPlayerTurn)
+		if (!isPlayerTurn || isPatternShowing)
 			return;
 
 		if (pattern [actual] != 2) {
@@ -117,7 +122,7 @@ public class Manager : MonoBehaviour {
 	}
 
 	public void RButton() {
-		if (!isPlayerTurn)
+		if (!isPlayerTurn || isPatternShowing)
 			return;
 
 		if (pattern [actual] != 3) {
@@ -141,7 +146,7 @@ public class Manager : MonoBehaviour {
 	}
 
 	public void BButton() {
-		if (!isPlayerTurn)
+		if (!isPlayerTurn || isPatternShowing)
 			return;
 
 		if (pattern [actual] != 4) {
