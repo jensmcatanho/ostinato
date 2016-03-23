@@ -75,6 +75,7 @@ public class Manager : MonoBehaviour {
 
 		if (pattern [actual] != button.GetComponent<Button> ().id) {
 			Utilities.PlayClip (errorSound, 100);
+			PlayerPrefs.SetInt ("currentScore", playerPoints);
 			Utilities.ChangeScene (2, 1.2f);
 			return;
 		}
@@ -91,5 +92,9 @@ public class Manager : MonoBehaviour {
 		Utilities.PlayClip (pointSound, 100);
 		playerPoints++;
 
+	}
+
+	public int getPlayerPoints() {
+		return playerPoints;
 	}
 }
