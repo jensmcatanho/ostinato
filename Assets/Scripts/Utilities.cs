@@ -8,11 +8,6 @@ public class Utilities : MonoBehaviour {
 
 	}
 
-	public static void PlayClip(AudioClip clip, int volume) {
-		AudioSource.PlayClipAtPoint (clip, new Vector3 (0.0f, 0.0f, 0.0f), volume);
-
-	}
-
 	public IEnumerator Wait(float seconds) {
 		yield return new WaitForSeconds (seconds);
 	}
