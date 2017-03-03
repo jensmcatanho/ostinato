@@ -32,6 +32,21 @@ public class GUISystem : MonoBehaviour {
 
 		isPatternShowing = true;
 
+		if (patternSize == 1) {
+			countdownDisplay.GetComponent<UnityEngine.UI.Text> ().text = "4";
+			yield return new WaitForSeconds (60.0f / bpm);
+			countdownDisplay.GetComponent<UnityEngine.UI.Text> ().text = "3";
+			yield return new WaitForSeconds (60.0f / bpm);
+			countdownDisplay.GetComponent<UnityEngine.UI.Text> ().text = "2";
+			yield return new WaitForSeconds (60.0f / bpm);
+			countdownDisplay.GetComponent<UnityEngine.UI.Text> ().text = "1";
+			yield return new WaitForSeconds (60.0f / bpm);
+			countdownDisplay.GetComponent<UnityEngine.UI.Text> ().text = "";
+			
+		} else {
+			yield return new WaitForSeconds (1.5f);
+		}
+
 		for (int i = 0; i < patternSize; i++) {
 			switch (gameplaySystem.GetComponent<GameplaySystem> ().pattern[i]) {
 			case 1:
