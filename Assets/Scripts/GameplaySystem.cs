@@ -30,7 +30,7 @@ public class GameplaySystem : MonoBehaviour {
 		if (pattern [actual] != button.GetComponent<Button> ().id) {
 			audioSystem.GetComponent<AudioSystem> ().ErrorSound (100);
 			PlayerPrefs.SetInt ("currentScore", playerPoints);
-			Utilities.ChangeScene (2, 1.2f);
+			Utilities.ChangeScene (1, 1.2f);
 			return;
 		}
 
